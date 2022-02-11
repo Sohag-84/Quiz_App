@@ -47,18 +47,22 @@ class _QuizAppState extends State<QuizApp> {
     'Comilla is a division of bangladesh'
   ];
 
+  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children:  [
-        const Expanded(
+         Expanded(
           flex: 5,
             child: Center(
               child: Padding(
                 padding: EdgeInsets.all(16.0),
-                child: Text("This is where the question text will go",
+                child: Text(
+                  questions.elementAt(questionNumber),
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20,color: Colors.white),
                 ),
               ),
