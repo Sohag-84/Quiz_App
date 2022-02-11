@@ -38,7 +38,13 @@ class QuizApp extends StatefulWidget {
 
 class _QuizAppState extends State<QuizApp> {
 
-  List<Icon> score = [
+  List<Icon> score = [];
+
+  //create questions list
+  List<String> questions = [
+    'Dhaka is the capital of Bangladesh',
+    'Noakhali is a independent country',
+    'Comilla is a division of bangladesh'
   ];
 
   @override
