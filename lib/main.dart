@@ -49,6 +49,8 @@ class _QuizAppState extends State<QuizApp> {
 
   int questionNumber = 0;
 
+  List<bool> answer = [true,false,false];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -59,11 +61,11 @@ class _QuizAppState extends State<QuizApp> {
           flex: 5,
             child: Center(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Text(
                   questions.elementAt(questionNumber),
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20,color: Colors.white),
+                  style: const TextStyle(fontSize: 20,color: Colors.white),
                 ),
               ),
             )
@@ -77,8 +79,10 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
+                  //questionNumber++;
                  setState(() {
-                   score.add(const Icon(Icons.check,color: Colors.green,));
+                   questionNumber++;
+                     score.add(const Icon(Icons.check,color: Colors.green,));
                  });
                 },
               ),
@@ -94,6 +98,7 @@ class _QuizAppState extends State<QuizApp> {
                 ),
                 onPressed: (){
                   setState(() {
+                    questionNumber++;
                     score.add(const Icon(Icons.close,color: Colors.red,));
                   });
 
