@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'question.dart';
 
-//QuestionBrain questionBrain = QuestionBrain();
-
 void main() {
   runApp(const MyApp());
 }
@@ -44,7 +42,7 @@ class _QuizAppState extends State<QuizApp> {
   List<Icon> score = [];
 
   QuestionMake questionMake = QuestionMake();
-  int questionNumber = 0;
+  //int questionNumber = 0; //it remove form here and make it private in question.dart file.so that after end of the question lis the app can't crash
 
 
 
@@ -60,8 +58,7 @@ class _QuizAppState extends State<QuizApp> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  questionMake.getQuestionText(questionNumber),
-                  //questionMake.questionBank[questionNumber].questionText, //because its need string.otherwise it will show error
+                  questionMake.getQuestionText(),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 20,color: Colors.white),
                 ),
@@ -77,13 +74,8 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
-                  questionMake.getQuestionText(questionNumber);
-
-                  // questionMake.questionBank[questionNumber].questionAnswer=true;
-                  // bool rightAnswer = questionMake.questionBank[questionNumber].questionAnswer; //here set boolean value
-
-                  bool rightAnswer = questionMake.getQuestionAns(questionNumber);
-
+                  questionMake.getQuestionText();
+                  bool rightAnswer = questionMake.getQuestionAns();
                   if(rightAnswer == true){
                     print("User got right answer");
                   }
@@ -91,7 +83,7 @@ class _QuizAppState extends State<QuizApp> {
                     print("User got wrong answer");
                   }
                  setState(() {
-                   questionNumber++;
+                   questionMake.nextQuestion();
                      score.add(const Icon(Icons.check,color: Colors.green,));
                  });
                 },
@@ -107,10 +99,7 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
-
-                  //bool rightAnswer = questionMake.questionBank[questionNumber].questionAnswer;
-
-                  bool rightAnswer = questionMake.getQuestionAns(questionNumber);
+                  bool rightAnswer = questionMake.getQuestionAns();
                   if(rightAnswer == false){
                     print("User got right answer");
                   }
@@ -118,7 +107,7 @@ class _QuizAppState extends State<QuizApp> {
                     print("User got wrong answer");
                   }
                   setState(() {
-                    questionNumber++;
+                    questionMake.nextQuestion();
                     score.add(const Icon(Icons.close,color: Colors.red,));
                   });
 
