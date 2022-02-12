@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,16 +41,26 @@ class _QuizAppState extends State<QuizApp> {
 
   List<Icon> score = [];
 
-  //create questions list
-  List<String> questions = [
-    'Dhaka is the capital of Bangladesh',
-    'Noakhali is a independent country',
-    'Comilla is a division of bangladesh'
+  // //create questions list
+  // List<String> questions = [
+  //   'Dhaka is the capital of Bangladesh',
+  //   'Noakhali is a independent country',
+  //   'Comilla is a division of bangladesh'
+  // ];
+  //List<bool> answer = [true,false,false];
+
+
+  //Question q = Question('Dhaka is the capital of Bangladesh', true);
+  List<Question> questionBank = [
+    Question('Dhaka is the capital of Bangladesh', true),
+    Question("Noakhali is a independent country", false),
+    Question("Cummilla is the division of Bangladesh", false),
+    Question("Kishoreganj is a district of Bangladesh", true),
   ];
 
   int questionNumber = 0;
 
-  List<bool> answer = [true,false,false];
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +74,7 @@ class _QuizAppState extends State<QuizApp> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  questions.elementAt(questionNumber),
+                  questionBank[questionNumber].questionText, //because its need string.otherwise it will show error
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 20,color: Colors.white),
                 ),
@@ -79,7 +90,13 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
-                  //questionNumber++;
+                  bool rightAnswer = questionBank[questionNumber].questionAnswer; //here set boolean value
+                  if(rightAnswer == true){
+                    print("User got right answer");
+                  }
+                  else{
+                    print("User got wrong answer");
+                  }
                  setState(() {
                    questionNumber++;
                      score.add(const Icon(Icons.check,color: Colors.green,));
@@ -97,6 +114,13 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
+                  bool rightAnswer = questionBank[questionNumber].questionAnswer;
+                  if(rightAnswer == false){
+                    print("User got right answer");
+                  }
+                  else{
+                    print("User got wrong answer");
+                  }
                   setState(() {
                     questionNumber++;
                     score.add(const Icon(Icons.close,color: Colors.red,));
