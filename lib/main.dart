@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'question.dart';
 
+//QuestionBrain questionBrain = QuestionBrain();
+
 void main() {
   runApp(const MyApp());
 }
@@ -51,13 +53,9 @@ class _QuizAppState extends State<QuizApp> {
 
 
   //Question q = Question('Dhaka is the capital of Bangladesh', true);
-  List<Question> questionBank = [
-    Question('Dhaka is the capital of Bangladesh', true),
-    Question("Noakhali is a independent country", false),
-    Question("Cummilla is the division of Bangladesh", false),
-    Question("Kishoreganj is a district of Bangladesh", true),
-  ];
 
+
+  QuestionMake questionMake = QuestionMake();
   int questionNumber = 0;
 
 
@@ -74,7 +72,7 @@ class _QuizAppState extends State<QuizApp> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  questionBank[questionNumber].questionText, //because its need string.otherwise it will show error
+                  questionMake.questionBank[questionNumber].questionText, //because its need string.otherwise it will show error
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 20,color: Colors.white),
                 ),
@@ -90,7 +88,7 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
-                  bool rightAnswer = questionBank[questionNumber].questionAnswer; //here set boolean value
+                  bool rightAnswer = questionMake.questionBank[questionNumber].questionAnswer; //here set boolean value
                   if(rightAnswer == true){
                     print("User got right answer");
                   }
@@ -114,7 +112,7 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
-                  bool rightAnswer = questionBank[questionNumber].questionAnswer;
+                  bool rightAnswer = questionMake.questionBank[questionNumber].questionAnswer;
                   if(rightAnswer == false){
                     print("User got right answer");
                   }
