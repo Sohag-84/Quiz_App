@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'question.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,6 +45,36 @@ class _QuizAppState extends State<QuizApp> {
   QuestionMake questionMake = QuestionMake();
   //int questionNumber = 0; //it remove form here and make it private in question.dart file.so that after end of the question lis the app can't crash
 
+  void checkAnswer(bool userPeckedAnswer){
+    bool rightAnswer = questionMake.getQuestionAns();
+
+    setState(() {
+
+      if(questionMake.isFinished()){
+        Alert(
+            context: context,
+          title: "Finished!",
+          desc: "You\'ve reached the end of the quiz",
+
+        ).show();
+
+        questionMake.reset();
+        score = [];
+      }
+     else{
+        if(userPeckedAnswer == rightAnswer){
+          score.add(const Icon(Icons.check,color: Colors.green,));
+
+        }
+        else{
+          score.add(const Icon(Icons.close,color: Colors.red,));
+
+        }
+        questionMake.nextQuestion();
+      }
+
+    });
+  }
 
 
   @override
@@ -58,7 +89,9 @@ class _QuizAppState extends State<QuizApp> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
+
                   questionMake.getQuestionText(),
+
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 20,color: Colors.white),
                 ),
@@ -74,18 +107,7 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
-                  questionMake.getQuestionText();
-                  bool rightAnswer = questionMake.getQuestionAns();
-                  if(rightAnswer == true){
-                    print("User got right answer");
-                  }
-                  else{
-                    print("User got wrong answer");
-                  }
-                 setState(() {
-                   questionMake.nextQuestion();
-                     score.add(const Icon(Icons.check,color: Colors.green,));
-                 });
+                  checkAnswer(true);
                 },
               ),
             ),
@@ -99,17 +121,8 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
-                  bool rightAnswer = questionMake.getQuestionAns();
-                  if(rightAnswer == false){
-                    print("User got right answer");
-                  }
-                  else{
-                    print("User got wrong answer");
-                  }
-                  setState(() {
-                    questionMake.nextQuestion();
-                    score.add(const Icon(Icons.close,color: Colors.red,));
-                  });
+
+                  checkAnswer(false);
 
                 },
               ),
