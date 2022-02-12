@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class Question{
   late String questionText;
   late bool questionAnswer;
@@ -9,10 +11,17 @@ class Question{
 }
 
 class QuestionMake{
-  List<Question> questionBank = [
+    final List<Question> _questionBank = [  //set private questionBank so that anyone can't change the answer in the main class
     Question('Dhaka is the capital of Bangladesh', true),
     Question("Noakhali is a independent country", false),
-    Question("Cummilla is the division of Bangladesh", false),
+    Question("Comilla is the division of Bangladesh", false),
     Question("Kishoreganj is a district of Bangladesh", true),
   ];
+   String getQuestionText(int questionNumber){
+     return _questionBank[questionNumber].questionText;
+   }
+   bool getQuestionAns(int questinNumber){
+     return _questionBank[questinNumber].questionAnswer;
+   }
 }
+

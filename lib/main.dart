@@ -43,18 +43,6 @@ class _QuizAppState extends State<QuizApp> {
 
   List<Icon> score = [];
 
-  // //create questions list
-  // List<String> questions = [
-  //   'Dhaka is the capital of Bangladesh',
-  //   'Noakhali is a independent country',
-  //   'Comilla is a division of bangladesh'
-  // ];
-  //List<bool> answer = [true,false,false];
-
-
-  //Question q = Question('Dhaka is the capital of Bangladesh', true);
-
-
   QuestionMake questionMake = QuestionMake();
   int questionNumber = 0;
 
@@ -72,7 +60,8 @@ class _QuizAppState extends State<QuizApp> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  questionMake.questionBank[questionNumber].questionText, //because its need string.otherwise it will show error
+                  questionMake.getQuestionText(questionNumber),
+                  //questionMake.questionBank[questionNumber].questionText, //because its need string.otherwise it will show error
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 20,color: Colors.white),
                 ),
@@ -88,7 +77,13 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
-                  bool rightAnswer = questionMake.questionBank[questionNumber].questionAnswer; //here set boolean value
+                  questionMake.getQuestionText(questionNumber);
+
+                  // questionMake.questionBank[questionNumber].questionAnswer=true;
+                  // bool rightAnswer = questionMake.questionBank[questionNumber].questionAnswer; //here set boolean value
+
+                  bool rightAnswer = questionMake.getQuestionAns(questionNumber);
+
                   if(rightAnswer == true){
                     print("User got right answer");
                   }
@@ -112,7 +107,10 @@ class _QuizAppState extends State<QuizApp> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: (){
-                  bool rightAnswer = questionMake.questionBank[questionNumber].questionAnswer;
+
+                  //bool rightAnswer = questionMake.questionBank[questionNumber].questionAnswer;
+
+                  bool rightAnswer = questionMake.getQuestionAns(questionNumber);
                   if(rightAnswer == false){
                     print("User got right answer");
                   }
